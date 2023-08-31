@@ -1,0 +1,112 @@
+/* Global styling for all pages */
+h1,h2,h3,h4,h5{
+  text-align: center;
+}
+/* Styling for the header */
+header nav a img{
+  max-width: 250px;
+}
+header nav div ul{
+  font-size: 25pt;
+}
+header button{
+  border:none;
+  float:right;
+}
+header button img{
+  max-width: 30px;
+  background-color: black;
+  border-radius: 20px;
+  margin: 0px;
+}
+
+body{
+  color:black;
+}
+
+@media only screen and (max-width: 576px) {
+  header button{
+    padding : 1px;
+  }
+  header button img{
+    max-width: 25px;
+  }
+}
+
+/* Screen size 1140px and above */
+h1 {
+  padding-left: 42px;
+}
+h4 {
+  text-align: left;
+}
+#locationSearch {
+  border-style: none none solid none;
+}
+.area{
+    font-size:larger;
+}
+.block .col-sm, #psi-container,.d4WFC div{
+  border: solid 1px;
+  border-radius: 20px;
+  box-shadow: 3px 6px grey;
+  margin: 3px;
+}
+.period0,
+.period1,
+.period2 {
+  border-width: 3px;
+  border-style: dashed none dashed none;
+  margin: 10px 0px;
+}
+
+.time div {
+  border-width: 1px;
+  border-style: none none solid none;
+  margin: 10px auto;
+  font-size: large;
+}
+.period0 div div,
+.period1 div div,
+.period2 div div {
+  text-align: right;
+  border-width: 1px;
+  border-style: none none solid none;
+  margin: 10px auto;
+}
+.col-sm div span {
+  float: right;
+}
+/* Screen breakpoints 540px 720px 960px 1140px */
+@media only screen and (max-width: 992px) {
+  .time div{
+    font-size:10pt;}
+}
+@media only screen and (max-width: 768px) {
+  h1,h2,h3,h4,h5,h6{
+    font-size: larger;
+  }
+  .time div{
+    font-size:8pt;}
+}
+@media only screen and (max-width: 576px) {
+  body{
+    font-size: medium;}
+  h1,h2,h3,h4,h5,h6{
+    font-size: larger;
+  }
+  #location,.t24,.ws24,.wd24,.rh24{
+    border-style: dashed;
+    border-radius: 15px;
+    border-width: 1px;
+    box-shadow: 2px 6px grey;
+    margin: 0px;
+  }
+  .t24,.ws24,.wd24,.rh24{
+    margin:10px;
+  }
+  .block .col-sm{
+      margin:10px;
+  }
+  
+}

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en-gb">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width"/>
+    <title>Carpe Diem</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+          integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link href="CSS/index.css" rel="stylesheet">
+</head>
+
+<body>
+<header>
+    <nav class="navbar navbar-expand-sm bg-light navbar-light">
+        <a class="navbar-brand" href="index.html">
+            <img src="Images/CarpeDiemLight.png" alt="Carpe Diem">
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+</header>
+<main>
+    <h1>Weather Forecast</h1>
+    <br>
+    <form>
+        <div>
+            <Label>Search your nearest location:</Label>
+            <input type="text" id="locationSearch" name="locationSearch">
+        </div>
+    </form>
+    <br>
+    <div class="container">
+        <h2>Current Weather</h2>
+        <br>
+        <div id="location">
+        </div>
+    </div>
+    <br>
+
+    <div class="container">
+        <h2>Weather Forecast for next 24 hour</h2>
+        <br>
+        <div class="hour24Weather">
+            <div class="row">
+                <div class="col-md">
+                    <div class="row">
+                        <div class="col-sm t24">
+                            <h4>Temperature</h4>
+                            <div>High:<span id="t24High"></span></div>
+                            <div>Low:<span id="t24Low"></span></div>
+                        </div>
+                        <div class="col-sm rh24">
+                            <h4>Relative Humidity</h4>
+                            <div>High:<span id="rh24High"></span></div>
+                            <div>Low:<span id="rh24Low"></span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="row">
+                        <div class="col-sm ws24">
+                            <h4>Wind Speed</h4>
+                            <div>High:<span id="ws24High"></span></div>
+                            <div>Low:<span id="ws24Low"></span></div>
+                        </div>
+                        <div class="col-sm wd24">
+                            <h4>Wind Direction</h4>
+                            <div>Direction: <span id="wd24"></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row block">
+                <div class="col-sm firstPeriod">
+                    <div class="time">
+                        <div>Start Time:<span id="stime0"></span></div>
+                        <div>End Time:<span id="etime0"></span></div>
+                    </div>
+                    <div class="period0">
+                        <div>North:
+                            <div id="north0"></div>
+                        </div>
+                        <div>South:
+                            <div id="south0"></div>
+                        </div>
+                        <div>East:
+                            <div id="east0"></div>
+                        </div>
+                        <div>West:
+                            <div id="west0"></div>
+                        </div>
+                        <div>Central:
+                            <div id="central0"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm secondPeriod">
+                    <div class="time">
+                        <div>Start Time:<span id="stime1"></span></div>
+                        <div>End Time:<span id="etime1"></span></div>
+                    </div>
+                    <div class="period1">
+                        <div>North:
+                            <div id="north1"></div>
+                        </div>
+                        <div>South:
+                            <div id="south1"></div>
+                        </div>
+                        <div>East:
+                            <div id="east1"></div>
+                        </div>
+                        <div>West:
+                            <div id="west1"></div>
+                        </div>
+                        <div>Central:
+                            <div id="central1"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm thirdPeriod">
+                    <div class="time">
+                        <div>Start Time:<span id="stime2"></span></div>
+                        <div>End Time:<span id="etime2"></span></div>
+                    </div>
+                    <div class="period2">
+                        <div>North:
+                            <div id="north2"></div>
+                        </div>
+                        <div>South:
+                            <div id="south2"></div>
+                        </div>
+                        <div>East:
+                            <div id="east2"></div>
+                        </div>
+                        <div>West:
+                            <div id="west2"></div>
+                        </div>
+                        <div>Central:
+                            <div id="central2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="psi">
+            <br>
+            <div id="psi-container">
+                <h3>PSI Chart</h3>
+
+                <canvas id="PSIChart" height="125">
+
+                </canvas>
+            </div>
+        </div>
+        <div class="psiError"></div>
+        <div class="hour24WeatherError"></div>
+        <br>
+        <h2>Weather Forecast for next 4 days</h2>
+        <br>
+        <div class="row d4WFC">
+            <div class="col-md d4Temp">
+                <h5>Temperature</h5>
+                <canvas id="d4Temp">
+                </canvas>
+            </div>
+            <div class="col-md d4rh">
+                <h5>Relative Humidity</h5>
+                <canvas id="d4rh">
+                </canvas>
+            </div>
+            <div class="col-md d4ws">
+                <h5>Wind Speed</h5>
+                <canvas id="d4ws">
+                </canvas>
+            </div>
+        </div>
+        <div class="d4WFCError"></div>
+    </div>
+</main>
+<footer>
+    <h5>2020-2021</h5>
+</footer>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"
+        integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
+<script src="JS/script.js"></script>
+<script src="JS/index.js"></script>
+</body>
+
+
+</html>
