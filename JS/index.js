@@ -1,3 +1,4 @@
+let date = new Date()
 function getCurrentMonth() {
     return (date.getMonth() + 1).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false})
 }
@@ -7,7 +8,7 @@ function getCurrentDateNumber() {
 }
 
 function getCurrentDateTime() {
-    date = new Date()
+
     return date.getFullYear() +
         "-" +
         getCurrentMonth() +
@@ -19,7 +20,6 @@ function getCurrentDateTime() {
 }
 
 function getCurrentDate() {
-    date = new Date()
     return date.getFullYear() + "-" + getCurrentMonth() + "-" + getCurrentDateNumber();
 }
 
@@ -27,6 +27,191 @@ function handleApiError(class_name, error_message) {
     $(class_name).hide()
     $(class_name + "Error").text(error_message)
 }
+
+// API 2-hour weather forecast
+//API Air Temperature
+$.ajax({
+    type: "GET",
+    dataType: "json",
+    contentType: "text/plain",
+    url: "https://api.data.gov.sg/v1/environment/air-temperature",
+    data: { date_time: getCurrentDateTime() },
+    error: function (status, request) {
+        console.log(`Air Temperature API ${request} ${status.status}`);
+        sessionStorage.setItem("airTemp", JSON.stringify(failedAPI));
+    },
+}).done(function (data) {
+    if (data.items[0].timestamp !== "") {
+        sessionStorage.setItem("airTemp", JSON.stringify(data));
+    } else {
+        console.log("Failed to load Air Temperature API!(API data error)");
+        sessionStorage.setItem("airTemp", JSON.stringify(failedAPI));
+    }
+});
+//API Relative humidity
+$.ajax({
+    type: "GET",
+    dataType: "json",
+    contentType: "text/plain",
+    url: "https://api.data.gov.sg/v1/environment/relative-humidity",
+    data: { date_time: getCurrentDateTime() },
+    error: function (status, request) {
+        console.log(`Relative Humidity API ${request} ${status.status}`);
+        sessionStorage.setItem("relativeHumidity", JSON.stringify(failedAPI));
+    },
+}).done(function (data) {
+    if (data.items[0].timestamp !== "") {
+        sessionStorage.setItem("relativeHumidity", JSON.stringify(data));
+    } else {
+        console.log("Failed to load Relative Humidity API! (API data error)");
+        sessionStorage.setItem("relativeHumidity", JSON.stringify(failedAPI));
+    }
+});
+//API Wind Speed
+$.ajax({
+    type: "GET",
+    dataType: "json",
+    contentType: "text/plain",
+    url: "https://api.data.gov.sg/v1/environment/wind-speed",
+    data: { date_time: getCurrentDateTime() },
+    error: function (status, request) {
+        console.log(`Wind Speed API ${request} ${status.status}`);
+        sessionStorage.setItem("WindSpeed", JSON.stringify(failedAPI));
+    },
+}).done(function (data) {
+    if (data.items[0].timestamp !== "") {
+        sessionStorage.setItem("WindSpeed", JSON.stringify(data));
+    } else {
+        console.log("Failed to load Wind Speed API! (API data error)");
+        sessionStorage.setItem("WindSpeed", JSON.stringify(failedAPI));
+    }
+});
+//API 2 hour weather forecast
+//API Air Temperature
+$.ajax({
+    type: "GET",
+    dataType: "json",
+    contentType: "text/plain",
+    url: "https://api.data.gov.sg/v1/environment/air-temperature",
+    data: { date_time: getCurrentDateTime() },
+    error: function (status, request) {
+        console.log(`Air Temperature API ${request} ${status.status}`);
+        sessionStorage.setItem("airTemp", JSON.stringify(failedAPI));
+    },
+}).done(function (data) {
+    if (data.items[0].timestamp !== "") {
+        sessionStorage.setItem("airTemp", JSON.stringify(data));
+    } else {
+        console.log("Failed to load Air Temperature API!(API data error)");
+        sessionStorage.setItem("airTemp", JSON.stringify(failedAPI));
+    }
+});
+//API Relative humidity
+$.ajax({
+    type: "GET",
+    dataType: "json",
+    contentType: "text/plain",
+    url: "https://api.data.gov.sg/v1/environment/relative-humidity",
+    data: { date_time: getCurrentDateTime() },
+    error: function (status, request) {
+        console.log(`Relative Humidity API ${request} ${status.status}`);
+        sessionStorage.setItem("relativeHumidity", JSON.stringify(failedAPI));
+    },
+}).done(function (data) {
+    if (data.items[0].timestamp !== "") {
+        sessionStorage.setItem("relativeHumidity", JSON.stringify(data));
+    } else {
+        console.log("Failed to load Relative Humidity API! (API data error)");
+        sessionStorage.setItem("relativeHumidity", JSON.stringify(failedAPI));
+    }
+});
+//API Wind Speed
+$.ajax({
+    type: "GET",
+    dataType: "json",
+    contentType: "text/plain",
+    url: "https://api.data.gov.sg/v1/environment/wind-speed",
+    data: { date_time: getCurrentDateTime() },
+    error: function (status, request) {
+        console.log(`Wind Speed API ${request} ${status.status}`);
+        sessionStorage.setItem("WindSpeed", JSON.stringify(failedAPI));
+    },
+}).done(function (data) {
+    if (data.items[0].timestamp !== "") {
+        sessionStorage.setItem("WindSpeed", JSON.stringify(data));
+    } else {
+        console.log("Failed to load Wind Speed API! (API data error)");
+        sessionStorage.setItem("WindSpeed", JSON.stringify(failedAPI));
+    }
+});
+//API 2 hour weather forecast
+$.ajax({
+    type: "GET",
+    dataType: "json",
+    contentType: "text/plain",
+    url: "https://api.data.gov.sg/v1/environment/2-hour-weather-forecast",
+    data: { date_time: getCurrentDateTime() },
+    error: function (status, request) {
+        console.log(`2 Hour Weather Forecast API ${request} ${status.status}`);
+        sessionStorage.setItem("02HourFC", JSON.stringify(failed2hrFC));
+    },
+}).done(function (data) {
+    if (data.area_metadata.length !== 0) {
+        sessionStorage.setItem("02HourFC", JSON.stringify(data.items));
+    } else {
+        console.log("Failed to load 2 Hour Weather Forecast API! (API data error)");
+        sessionStorage.setItem("02HourFC", JSON.stringify(failed2hrFC));
+    }
+});
+//Current Weather function extract and display all the data saved in session storage
+function closestDist(lat, long, lat1, long1) {
+    let xDiff = lat - lat1;
+    let yDiff = long - long1;
+    return  xDiff * xDiff + yDiff * yDiff;
+}
+function findReading(lat, long, info) {
+    let stationInfo = info.metadata.stations;
+    let index;
+    let dist = 1000;
+    for (i = 0; i < stationInfo.length; i++) {
+        let station = stationInfo[i];
+        let stationLat = station.location.latitude;
+        let stationLong = station.location.longitude;
+        let diff = closestDist(lat, long, stationLat, stationLong);
+        if (diff <= dist) {
+            index = i;
+            dist = diff;
+        }
+    }
+    return info.items[0].readings[index].value;
+}
+function searchWeather(
+    name,
+    i,
+    lat,
+    long
+) {
+    const airTempRT = JSON.parse(sessionStorage.getItem("airTemp"));
+    const relativeHumidityRT = JSON.parse(
+        sessionStorage.getItem("relativeHumidity")
+    );
+    const windSpeedRT = JSON.parse(sessionStorage.getItem("WindSpeed"));
+
+    const weaFc2Hr = JSON.parse(sessionStorage.getItem("02HourFC"));
+    $(`#${"location" + i}`).append("<h4>" + name + "</h4><areadata></areadata>");
+    let airTemp = findReading(lat, long, airTempRT);
+    let weatherForecast = weaFc2Hr[0].forecasts[i].forecast;
+    let relativeHumidity = findReading(lat, long, relativeHumidityRT);
+    let windSpeed = findReading(lat, long, windSpeedRT);
+    $(`#${"location" + i} areadata`).append(`<div class = "row">
+  <div class ="col-sm">Forecast : ${weatherForecast}</div>
+  <div class ="col-sm">Temperature: ${airTemp}°C</div>
+  <div class ="col-sm">Relative Humidity: ${relativeHumidity}%</div>
+  <div class ="col-sm">Wind Speed : ${windSpeed}knots</div>
+  </div>`);
+}
+
+
 
 //API 24-hour weather forecast
 function load24Hour(weaFc24Hr) {
@@ -314,3 +499,92 @@ function chartPSI(label_x, psiData) {
         },
     });
 }
+
+$(document).ajaxStop(function(){
+    //Variable to be used by main program
+    const area = area_JSON.area_metadata;
+    //Initialization
+    let lat = area[0].label_location.latitude;
+    let long = area[0].label_location.longitude;
+    let name = area[0].name;
+    $("#location").append(
+        `<div class ="area" id = "${"location" + 0}"></div>`
+    );
+    searchWeather(name,0,lat,long)
+
+
+    let hide = true;
+    if ($(window).width() <= 576) {
+        $("#indexLocation").click(function () {
+            $("#location div").remove();
+            let index = $("select#indexLocation").val();
+            //Get the latitude and longitude of the location and find closest
+            //weather reading station
+            let lat = area[index].label_location.latitude;
+            let long = area[index].label_location.longitude;
+            //Labeling location
+            let name = area[index].name;
+            $("#location").append(`<div id = "${"location" + index}"></div>`);
+            searchWeather(
+                name,
+                index,
+                lat,
+                long
+            );
+            //Codes below allow this portion to toggle to expand
+            $(`#${"location" + index} areadata`).hide();
+            $(`#${"location" + index}`).click(function () {
+                if (hide === true) {
+                    $(`#${"location" + index} areadata`).show();
+                    hide = false;
+                } else {
+                    $(`#${"location" + index} areadata`).hide();
+                    hide = true;
+                }
+            });
+        });
+    }
+    else{
+        //Prevent default event from happening form input
+        //Prevent event occuring when enter is pressed
+        $("form input").keydown(function (a) {
+            if (a.keyCode === 13) {
+                a.preventDefault();
+            }
+        });
+        //Search function(or at least close to a search)
+        $("#locationSearch").keyup(function () {
+            //Get input from user
+            let userValue = $("#locationSearch").val().toUpperCase();
+            let userLen = userValue.length;
+            if (userLen !== 0) {
+                $("#location div").remove();
+                let indexResult = [];
+                //Search index of related areas
+                for (a = 0; a < area.length; a++) {
+                    let areaname = area[a].name.slice(0, userLen).toUpperCase();
+                    if (userValue === areaname) {
+                        indexResult.push(a);
+                    }
+                }
+                if (indexResult.length > 0) {
+                    //From index establish latitude and longitude of each respective location
+
+                    let indexed = indexResult[0];
+                    let lat = area[indexed].label_location.latitude;
+                    let long = area[indexed].label_location.longitude;
+                    //Labeling location
+                    let name = area[indexed].name;
+                    $("#location").append(
+                        `<div class ="area" id = "${"location" + i}"></div>`
+                    );
+                    searchWeather(
+                        name,
+                        i,
+                        lat,
+                        long
+                    );
+                }
+            }
+        });}
+})
